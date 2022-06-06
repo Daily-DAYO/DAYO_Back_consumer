@@ -13,7 +13,7 @@ public class FcmMessageService {
 
   private final FirebaseMessaging firebaseMessaging;
 
-  public String sendMessage(Note note, String topic)
+  public void sendMessage(Note note, String topic)
       throws FirebaseMessagingException {
 
     Notification notification = Notification.builder()
@@ -28,6 +28,6 @@ public class FcmMessageService {
         .setTopic(topic)
         .build();
 
-    return firebaseMessaging.send(message);
+    firebaseMessaging.send(message);
   }
 }
