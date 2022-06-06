@@ -18,18 +18,21 @@ public class FcmSender {
 
   @KafkaListener(topics = "HEART", groupId = "foo")
   public void fcmHeart(String message) throws FirebaseMessagingException {
+    log.info("message -> {}", message);
     Note note = makeNote(message);
     messageService.sendMessage(note, "HEART");
   }
 
   @KafkaListener(topics = "COMMENT", groupId = "foo")
   public void fcmComment(String message) throws FirebaseMessagingException {
+    log.info("message -> {}", message);
     Note note = makeNote(message);
     messageService.sendMessage(note, "COMMENT");
   }
 
   @KafkaListener(topics = "FOLLOW", groupId = "foo")
   public void fcmFollow(String message) throws FirebaseMessagingException {
+    log.info("message -> {}", message);
     Note note = makeNote(message);
     messageService.sendMessage(note, "FOLLOW");
   }
