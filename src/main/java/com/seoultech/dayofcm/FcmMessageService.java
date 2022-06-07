@@ -25,7 +25,7 @@ public class FcmMessageService {
         .setToken(note.getDeviceToken())
         .setNotification(notification)
         .putAllData(note.getData())
-        .setTopic(topic)
+//        .setTopic(topic)
         .build();
 
     firebaseMessaging.send(message);
