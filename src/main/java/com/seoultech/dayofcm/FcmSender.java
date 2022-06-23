@@ -19,32 +19,57 @@ public class FcmSender {
   @KafkaListener(topics = "HEART", groupId = "foo")
   public void fcmHeart(String message) throws FirebaseMessagingException {
     log.info("message -> {}", message);
-    Note note = makeNote(message);
+    Note note = makeNoteWithPost(message);
     messageService.sendMessage(note, "HEART");
   }
 
   @KafkaListener(topics = "COMMENT", groupId = "foo")
   public void fcmComment(String message) throws FirebaseMessagingException {
     log.info("message -> {}", message);
-    Note note = makeNote(message);
+    Note note = makeNoteWithPost(message);
     messageService.sendMessage(note, "COMMENT");
   }
 
   @KafkaListener(topics = "FOLLOW", groupId = "foo")
   public void fcmFollow(String message) throws FirebaseMessagingException {
     log.info("message -> {}", message);
-    Note note = makeNote(message);
+    Note note = makeNoteWithMember(message);
     messageService.sendMessage(note, "FOLLOW");
   }
 
-  private Note makeNote(String message) {
+  private Note makeNoteWithPost(String message) {
     JSONObject jsonObject = new JSONObject(message);
     String subject = jsonObject.get("subject").toString();
     String body = jsonObject.get("body").toString();
     String deviceToken = jsonObject.get("deviceToken").toString();
+    String content = jsonObject.get("content").toString();
+    String postId = jsonObject.get("postId").toString();
+    String topic = jsonObject.get("topic").toString();
 
     Map<String, String> data = new HashMap<>();
     data.put("body", body);
+    data.put("content", content);
+    data.put("postId", postId);
+    data.put("topic", topic);
+
+    return new Note(subject, null, data, null, deviceToken);
+  }
+
+  private Note makeNoteWithMember(String message) {
+    JSONObject jsonObject = new JSONObject(message);
+    String subject = jsonObject.get("subject").toString();
+    String body = jsonObject.get("body").toString();
+    String deviceToken = jsonObject.get("deviceToken").toString();
+    String content = jsonObject.get("content").toString();
+    String memberId = jsonObject.get("memberId").toString();
+    String topic = jsonObject.get("topic").toString();
+
+    Map<String, String> data = new HashMap<>();
+    data.put("body", body);
+    data.put("content", content);
+    data.put("memberId", memberId);
+    data.put("topic", topic);
+
     return new Note(subject, null, data, null, deviceToken);
   }
 
