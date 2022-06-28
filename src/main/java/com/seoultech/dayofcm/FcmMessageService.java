@@ -17,7 +17,7 @@ public class FcmMessageService {
       throws FirebaseMessagingException {
 
     Notification notification = Notification.builder()
-        .setTitle(note.getSubject())
+        .setTitle(null)
         .setBody(note.getContent())
         .build();
 
