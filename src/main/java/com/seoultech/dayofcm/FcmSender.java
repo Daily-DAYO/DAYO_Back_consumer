@@ -52,7 +52,7 @@ public class FcmSender {
     data.put("postId", postId);
     data.put("topic", topic);
 
-    return new Note(subject, content, data, null, deviceToken);
+    return new Note(subject, body, data, null, deviceToken);
   }
 
   private Note makeNoteWithMember(String message) {
@@ -70,7 +70,7 @@ public class FcmSender {
     data.put("memberId", memberId);
     data.put("topic", topic);
 
-    return new Note(subject, content, data, null, deviceToken);
+    return new Note(subject, body, data, null, deviceToken);
   }
 
 
