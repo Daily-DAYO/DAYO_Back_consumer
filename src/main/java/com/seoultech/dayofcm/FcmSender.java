@@ -45,14 +45,16 @@ public class FcmSender {
     String content = jsonObject.get("content").toString();
     String postId = jsonObject.get("postId").toString();
     String topic = jsonObject.get("topic").toString();
+    String image = jsonObject.get("image").toString();
 
     Map<String, String> data = new HashMap<>();
     data.put("body", body);
     data.put("content", content);
     data.put("postId", postId);
     data.put("topic", topic);
+    data.put("image", image);
 
-    return new Note(subject, body, data, null, deviceToken);
+    return new Note(subject, body, data, image, deviceToken);
   }
 
   private Note makeNoteWithMember(String message) {
