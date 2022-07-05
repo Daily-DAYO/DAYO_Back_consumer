@@ -1,4 +1,4 @@
-package com.seoultech.dayofcm;
+package com.seoultech.dayoconsumer.fcm;
 
 import com.google.firebase.messaging.FirebaseMessagingException;
 import java.util.HashMap;

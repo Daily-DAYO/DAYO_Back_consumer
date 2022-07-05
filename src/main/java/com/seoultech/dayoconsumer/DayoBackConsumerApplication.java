@@ -1,4 +1,4 @@
-package com.seoultech.dayofcm;
+package com.seoultech.dayoconsumer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

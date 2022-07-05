@@ -1,4 +1,4 @@
-package com.seoultech.dayofcm;
+package com.seoultech.dayoconsumer.fcm;
 
 import java.util.Map;
 import lombok.AllArgsConstructor;
