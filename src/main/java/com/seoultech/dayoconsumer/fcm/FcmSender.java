@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.json.JSONObject;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -17,22 +18,28 @@ public class FcmSender {
   private final FcmMessageService messageService;
 
   @KafkaListener(topics = "HEART", groupId = "foo")
-  public void fcmHeart(String message) throws FirebaseMessagingException {
-    log.info("message -> {}", message);
+  public void fcmHeart(String message, ConsumerRecord<String, String> record)
+      throws FirebaseMessagingException {
+    log.info("message {} from partition {} with timestamp {}", message, record.partition(),
+        record.timestamp());
     Note note = makeNoteWithPost(message);
     messageService.sendMessage(note, "HEART");
   }
 
   @KafkaListener(topics = "COMMENT", groupId = "foo")
-  public void fcmComment(String message) throws FirebaseMessagingException {
-    log.info("message -> {}", message);
+  public void fcmComment(String message, ConsumerRecord<String, String> record)
+      throws FirebaseMessagingException {
+    log.info("message {} from partition {} with timestamp {}", message, record.partition(),
+        record.timestamp());
     Note note = makeNoteWithPost(message);
     messageService.sendMessage(note, "COMMENT");
   }
 
   @KafkaListener(topics = "FOLLOW", groupId = "foo")
-  public void fcmFollow(String message) throws FirebaseMessagingException {
-    log.info("message -> {}", message);
+  public void fcmFollow(String message, ConsumerRecord<String, String> record)
+      throws FirebaseMessagingException {
+    log.info("message {} from partition {} with timestamp {}", message, record.partition(),
+        record.timestamp());
     Note note = makeNoteWithMember(message);
     messageService.sendMessage(note, "FOLLOW");
   }
